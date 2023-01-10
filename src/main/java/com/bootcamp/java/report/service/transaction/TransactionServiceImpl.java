@@ -33,6 +33,8 @@ public class TransactionServiceImpl implements TransactionService{
 
     @Override
     public Mono<TransactionDTO> register(TransactionDTO transactionDTO) {
-        return null;
+
+        log.info("Registrar transaction en BD");
+        return Mono.just(transactionDTO);
     }
 }

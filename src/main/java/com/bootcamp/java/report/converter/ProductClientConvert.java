@@ -69,5 +69,33 @@ public class ProductClientConvert {
                 .build();
     }
 
+    public static ProductClientDTO KafkaDTOToDTO(com.bootcamp.java.kafka.ProductClientDTO productClientDTO) {
+        return ProductClientDTO.builder()
+                .idProduct(productClientDTO.getIdProduct())
+                .productDescription(productClientDTO.getProductDescription())
+                .idProductType(productClientDTO.getIdProductType())
+                .productTypeDescription(productClientDTO.getProductTypeDescription())
+                .idProductSubType(productClientDTO.getIdProductSubType())
+                .productSubTypeDescription(productClientDTO.getProductSubTypeDescription())
+                .idClient(productClientDTO.getIdClient())
+                .idClientType(productClientDTO.getIdClientType())
+                .clientTypeDescription(productClientDTO.getClientTypeDescription())
+                .idClientDocumentType(productClientDTO.getIdClientDocumentType())
+                .clientDocumentTypeDescription(productClientDTO.getClientDocumentTypeDescription())
+                .documentNumber(productClientDTO.getDocumentNumber())
+                .fullName(productClientDTO.getFullName())
+                .authorizedSigners(productClientDTO.getAuthorizedSigners())
+                .creditLimit(productClientDTO.getCreditLimit())
+                .balance(productClientDTO.getBalance())
+                .debt(productClientDTO.getDebt())
+                .maintenanceCost(productClientDTO.getMaintenanceCost())
+                .movementLimit(productClientDTO.getMovementLimit())
+                .credits(productClientDTO.getCredits())
+                .accountNumber(productClientDTO.getAccountNumber())
+                .transactionFee(productClientDTO.getTransactionFee())
+                .creditCardNumber(productClientDTO.getCreditCardNumber())
+                .build();
+    }
+
 
 }

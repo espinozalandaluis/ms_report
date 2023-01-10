@@ -24,7 +24,8 @@ public class ProductClientServiceImpl implements ProductClientService{
 
 
     @Override
-    public Mono<ProductClientDTO> create(ProductClientDTO productClientRequest) {
-        return null;
+    public Mono<ProductClientDTO> create(ProductClientDTO productClientDTO) {
+        log.info("Registrar ProductClientDTO en BD");
+        return Mono.just(productClientDTO);
     }
 }

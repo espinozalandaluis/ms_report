@@ -44,7 +44,6 @@ public class TransactionConvert {
         return trx;
     }
 
-
     public static Transaction ProductClientEntityToTransactionEntity(ProductClient productClient) {
         return Transaction.builder()
                 .idProductClient(productClient.getId())
@@ -57,6 +56,20 @@ public class TransactionConvert {
                 .transactionFee(productClient.getTransactionFee())
                 .build();
     }
+
+    public static TransactionDTO KafkaDTOtoEntity(com.bootcamp.java.kafka.TransactionDTO transactionDTO) {
+        return  TransactionDTO.builder()
+                .idProductClient(transactionDTO.getIdProductClient())
+                .idTransactionType(transactionDTO.getIdTransactionType())
+                .mont(transactionDTO.getMont())
+                .registrationDate(Funciones.GetCurrentDate())
+                .destinationAccountNumber(transactionDTO.getDestinationAccountNumber())
+                .sourceAccountNumber(transactionDTO.getSourceAccountNumber())
+                .ownAccountNumber(transactionDTO.getOwnAccountNumber())
+                .transactionFee(transactionDTO.getTransactionFee())
+                .build();
+    }
+
 
 
 }
