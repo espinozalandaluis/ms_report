@@ -1,6 +1,6 @@
 package com.bootcamp.java.report.repository;
 
-import com.bootcamp.java.pasivoahorro.entity.Transaction;
+import com.bootcamp.java.report.entity.Transaction;
 import org.springframework.data.mongodb.repository.Query;
 import org.springframework.data.mongodb.repository.ReactiveMongoRepository;
 import org.springframework.stereotype.Repository;
