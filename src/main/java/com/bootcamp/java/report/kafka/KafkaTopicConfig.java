@@ -9,10 +9,10 @@ import org.springframework.kafka.config.TopicBuilder;
 @Configuration
 public class KafkaTopicConfig {
 
-    @Value("${spring.kafka.topic.productclient.name}")
+    @Value("${spring.kafka.topic.productclient.name:my_topic_productclient}")
     private String topicProductclient;
 
-    @Value("${spring.kafka.topic-transaction.name}")
+    @Value("${spring.kafka.topic-transaction.name:my_topic_transaction}")
     private String topicTransaction;
 
     @Bean
