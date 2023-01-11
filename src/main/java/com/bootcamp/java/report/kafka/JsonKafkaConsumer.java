@@ -33,17 +33,19 @@ public class JsonKafkaConsumer {
             groupId = "${spring.kafka.consumer.group-id:myGroup}"
     )
     public void consumeProductClient(ProductClientDTO productClientDTO){
-        LOGGER.info(String.format("consumeProductClientDTO message recieved -> %s", productClientDTO.toString()));
-        productClientService.create(productClientConvert.KafkaDTOToDTO(productClientDTO));
+        com.bootcamp.java.report.dto.ProductClientDTO productClientDTO1 = ProductClientConvert.KafkaDTOToDTO(productClientDTO);
+        LOGGER.info(String.format("consumeProductClientDTO message recieved -> %s", productClientDTO1.toString()));
+        productClientService.create(productClientDTO1).block();
         LOGGER.info(String.format("consumeProductClientDTO REGISTERED"));
     }
+
 
     @KafkaListener(topics = "${spring.kafka.topic-transaction.name:my_topic_transaction}",
             groupId = "${spring.kafka.consumer.group-id:myGroup}"
     )
     public void consumeTransaction(TransactionDTO transactionDTO){
         LOGGER.info(String.format("consumeTransactionDTO message recieved -> %s", transactionDTO.toString()));
-        transactionService.register(transactionConvert.KafkaDTOtoEntity(transactionDTO));
+        transactionService.register(transactionConvert.KafkaDTOtoEntity(transactionDTO)).block();;
         LOGGER.info(String.format("consumeTransactionDTO REGISTERED"));
     }
 

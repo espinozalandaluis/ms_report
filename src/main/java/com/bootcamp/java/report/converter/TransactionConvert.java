@@ -32,6 +32,7 @@ public class TransactionConvert {
 
     public static Transaction DTOtoEntity(TransactionDTO transactionDTO) {
         Transaction trx =  Transaction.builder()
+                .id(transactionDTO.getId())
                 .idProductClient(transactionDTO.getIdProductClient())
                 .idTransactionType(transactionDTO.getIdTransactionType())
                 .mont(transactionDTO.getMont())
@@ -59,6 +60,7 @@ public class TransactionConvert {
 
     public static TransactionDTO KafkaDTOtoEntity(com.bootcamp.java.kafka.TransactionDTO transactionDTO) {
         return  TransactionDTO.builder()
+                .id(transactionDTO.getId())
                 .idProductClient(transactionDTO.getIdProductClient())
                 .idTransactionType(transactionDTO.getIdTransactionType())
                 .mont(transactionDTO.getMont())

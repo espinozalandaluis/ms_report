@@ -43,6 +43,7 @@ public class ProductClientConvert {
 
     public static ProductClient DTOToEntity(ProductClientDTO productClientDTO) {
         return ProductClient.builder()
+                .id(productClientDTO.getId())
                 .idProduct(productClientDTO.getIdProduct())
                 .productDescription(productClientDTO.getProductDescription())
                 .idProductType(productClientDTO.getIdProductType())
@@ -71,6 +72,7 @@ public class ProductClientConvert {
 
     public static ProductClientDTO KafkaDTOToDTO(com.bootcamp.java.kafka.ProductClientDTO productClientDTO) {
         return ProductClientDTO.builder()
+                .id(productClientDTO.getId())
                 .idProduct(productClientDTO.getIdProduct())
                 .productDescription(productClientDTO.getProductDescription())
                 .idProductType(productClientDTO.getIdProductType())

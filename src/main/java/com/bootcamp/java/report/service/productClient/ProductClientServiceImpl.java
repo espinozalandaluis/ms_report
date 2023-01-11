@@ -9,6 +9,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 @Slf4j
@@ -29,14 +30,40 @@ public class ProductClientServiceImpl implements ProductClientService{
         log.info("Registrar ProductClientDTO en BD");
 
         return productClientRepository.findById(productClientDTO.getId())
-                .switchIfEmpty(productClientRepository.save(ProductClientConvert.DTOToEntity(productClientDTO)))
                 .flatMap(productClient -> {
                     //Actualizar Balance
+                    log.info("Actualizar Balance: {}", productClient.toString());
                     productClient.setBalance(productClientDTO.getBalance());
                     return productClientRepository.save(productClient)
                             .map(prdcli -> ProductClientConvert.EntityToDTO(prdcli));
-                });
+                })
+                .switchIfEmpty(productClientRepository.save(ProductClientConvert.DTOToEntity(productClientDTO))
+                        .map(ProductClientConvert::EntityToDTO));
 
         //return Mono.just(productClientDTO);
+    }
+
+    @Override
+    public Flux<ProductClientDTO> findAll() {
+        log.debug("findAll executing");
+        Flux<ProductClientDTO> dataProductClientDTO = productClientRepository.findAll()
+                .map(ProductClientConvert::EntityToDTO);
+        return dataProductClientDTO;
+    }
+
+    @Override
+    public Flux<ProductClientDTO> findByDocumentNumber(String DocumentNumber) {
+        log.debug("findByDocumentNumber executing");
+        Flux<ProductClientDTO> dataProductClientDTO = productClientRepository.findByDocumentNumber(DocumentNumber)
+                .map(ProductClientConvert::EntityToDTO)
+                .switchIfEmpty(Mono.error(() -> new FunctionalException("No se encontraron registros")));;
+        return dataProductClientDTO;
+    }
+
+    @Override
+    public Mono<ProductClientDTO> findByAccountNumber(String AccountNumber) {
+        return productClientRepository.findByAccountNumber(AccountNumber)
+                .map(ProductClientConvert::EntityToDTO)
+                .switchIfEmpty(Mono.error(() -> new FunctionalException("No se encontraron registros")));
     }
 }
