@@ -13,7 +13,7 @@ import reactor.core.publisher.Mono;
 @Slf4j
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/v1/pasivoahorro")
+@RequestMapping("/v1/report")
 public class productClientController {
 
     @Autowired
