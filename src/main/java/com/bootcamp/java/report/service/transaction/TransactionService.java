@@ -10,6 +10,11 @@ public interface TransactionService {
 
     public Flux<ProductClientReportDTO> findByDocumentNumber(String documentNumber);
 
+    public Flux<ProductClientReportDTO> findByReport(String documentNumber,
+                                                     Integer idProduct,
+                                                     Integer initDate,
+                                                     Integer  finalDate);
+
     public Flux<TransactionDTO> findAll();
 
 }

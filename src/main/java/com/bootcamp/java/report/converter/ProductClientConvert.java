@@ -37,6 +37,7 @@ public class ProductClientConvert {
                 .billingDate(productClient.getBillingDate())
                 .invoiceDebt(productClient.getInvoiceDebt())
                 .expiredDebt(productClient.getExpiredDebt())
+                .registerDate(productClient.getRegisterDate())
                 .build();
     }
 
@@ -67,6 +68,7 @@ public class ProductClientConvert {
                 .accountNumber(productClientDTO.getAccountNumber())
                 .transactionFee(productClientDTO.getTransactionFee())
                 .creditCardNumber(productClientDTO.getCreditCardNumber())
+                .registerDate(productClientDTO.getRegisterDate())
                 .build();
     }
 
@@ -96,6 +98,7 @@ public class ProductClientConvert {
                 .accountNumber(productClientDTO.getAccountNumber())
                 .transactionFee(productClientDTO.getTransactionFee())
                 .creditCardNumber(productClientDTO.getCreditCardNumber())
+                .registerDate(productClientDTO.getRegisterDate())
                 .build();
     }
 

@@ -40,4 +40,5 @@ public class ProductClientDTO {
     private Date billingDate;
     private Double invoiceDebt;
     private Double expiredDebt;
+    private Date registerDate;
 }

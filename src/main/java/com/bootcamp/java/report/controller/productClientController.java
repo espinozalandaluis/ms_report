@@ -2,6 +2,7 @@ package com.bootcamp.java.report.controller;
 
 import com.bootcamp.java.report.dto.*;
 import com.bootcamp.java.report.service.productClient.ProductClientService;
+import com.bootcamp.java.report.service.transaction.TransactionService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,9 @@ public class productClientController {
     @Autowired
     private ProductClientService productClientService;
 
+    @Autowired
+    private TransactionService transactionService;
+
     @GetMapping()
     public Mono<ResponseEntity<Flux<ProductClientDTO>>> getAll(){
         log.info("getAll executed");
@@ -35,10 +39,21 @@ public class productClientController {
 
     @GetMapping("getByAccountNumber/{accountNumber}")
     public Mono<ResponseEntity<ProductClientDTO>> getByAccountNumber(@PathVariable String accountNumber){
-        log.info("findByAccountNumber executed {}", accountNumber);
+        log.info("getByAccountNumber executed {}", accountNumber);
         return productClientService.findByAccountNumber(accountNumber)
                 .map(ResponseEntity::ok)
                 .defaultIfEmpty(ResponseEntity.noContent().build());
     }
+
+    @GetMapping("getReport/{documentNumber}/{idProduct}/{initDate}/{finalDate}")
+    public Mono<ResponseEntity<Flux<ProductClientReportDTO>>> getReport(@PathVariable String documentNumber,
+                                                            @PathVariable Integer idProduct,
+                                                            @PathVariable Integer initDate,
+                                                            @PathVariable Integer finalDate){
+        log.info("getReport executed {} {} {} {}", documentNumber,idProduct , initDate,finalDate);
+        return Mono.just(ResponseEntity.ok()
+                .body(transactionService.findByReport(documentNumber, idProduct, initDate, finalDate)));
+    }
+
 
 }
